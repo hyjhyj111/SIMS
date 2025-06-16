@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.31)
 project(stu)
 
 set(CMAKE_CXX_STANDARD 23)
-file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS src/*.cpp main.cpp)
-add_executable(stu main.cpp ${SOURCES})
+file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS src/*.cpp src/main.cpp)
+add_executable(stu src/main.cpp ${SOURCES})
 target_include_directories(stu PRIVATE include)
 # 设置 MySQL 头文件路径
 # 正确写法
