@@ -1,18 +1,19 @@
 #pragma once
 #include <string>
 #include <format>
+#include <utility>
 class Student {
 public:
     Student() = default;
-    Student(const std::string& name, const std::string& major, int id, int age, int sex)
-            : name(name), major(major), id(id), age(age), sex(sex) {}
+    Student(std::string  name, std::string  major, int id, int age, int sex)
+            : name(std::move(name)), major(std::move(major)), id(id), age(age), sex(sex) {}
 
 private:
     std::string name;
     std::string major;
-    int id;
-    int age;
-    int sex;
+    int id{};
+    int age{};
+    int sex{};
     friend struct std::formatter<Student>;
     friend class Database;
 };
