@@ -1,7 +1,6 @@
 #pragma once
 #include <mysql/mysql.h>
 #include <vector>
-#include <format>
 #include <string>
 #include <Student.hpp>
 struct Result {
