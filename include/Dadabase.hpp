@@ -19,9 +19,12 @@ public:
     void insert_student(const Student &) ;
     void insert_admin(const std::string&, const std::string&) ;
     Student select_by_id(int );
+    bool delete_by_id(int id);
     ~Database() ;
 private:
     MYSQL mysql{};
     Result _query(const std::string& sql) ;
     void _insert(const std::string& sql) ;
+
+
 };

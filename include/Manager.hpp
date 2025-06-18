@@ -1,10 +1,12 @@
 #pragma once
-namespace manager {
-    void manu();
-    void add_student();
-    void show_student();
-    void delete_student();
-    void edit_student();
-    void find_student();
-    void show_sorted();
-}
+class manager {
+public:
+    static void menu();
+    static void add_student();
+    static void show_student();
+    static void delete_student();
+    static void edit_student();
+    static void find_student();
+    static void show_sorted();
+    static void add_admin();
+};

@@ -1,16 +1,19 @@
-cmake_minimum_required(VERSION 3.31)
+cmake_minimum_required(VERSION 3.14)
 project(stu)
 
 set(CMAKE_CXX_STANDARD 23)
-file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS src/*.cpp src/main.cpp)
-add_executable(stu src/main.cpp ${SOURCES})
+
+# 自动查找源文件
+file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS src/*.cpp)
+add_executable(stu ${SOURCES})
+
+# 包含头文件路径
 target_include_directories(stu PRIVATE include)
-# 设置 MySQL 头文件路径
-# 正确写法
+
+# 使用 fmt 官方 CMake 配置
+add_subdirectory(dependencies/fmt EXCLUDE_FROM_ALL)
+
+# MySQL and fmt 配置
 target_include_directories(stu PRIVATE /opt/homebrew/include)
-
-# 设置 MySQL 链接库路径
 target_link_directories(stu PRIVATE /opt/homebrew/lib)
-
-# 链接 mysqlclient 库
-target_link_libraries(stu PRIVATE mysqlclient)
+target_link_libraries(stu PRIVATE mysqlclient fmt-header-only)

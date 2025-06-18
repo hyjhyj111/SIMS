@@ -2,6 +2,9 @@
 #include <string>
 #include <format>
 #include <utility>
+#include <fmt/core.h>
+#include "Manager.hpp"
+
 class Student {
 public:
     Student() = default;
@@ -14,16 +17,22 @@ private:
     int id{};
     int age{};
     int sex{};
-    friend struct std::formatter<Student>;
+    friend struct fmt::formatter<Student>;
     friend class Database;
+    friend class manager;
 };
 
-template <>
-struct std::formatter<Student> : std::formatter<std::string> {
-    auto format(const Student& s, auto& ctx) {
-        return formatter<std::string>::format(
-                std::format("Student(name: {}, major: {}, id: {}, age: {}, sex: {})",
-                            s.name, s.major, s.id, s.age, s.sex),
-                ctx);
+template<>
+struct fmt::formatter<Student> {
+    constexpr auto parse(format_parse_context& ctx) {
+        return ctx.begin();
+    }
+
+    template <typename FormatContext>
+    auto format(const Student& s, FormatContext& ctx) const{
+        return fmt::format_to(
+                ctx.out(),
+                "Student(name = {:^7}, major = {:^7}, id = {:^7}, age = {:^7}, sex = {:^7})",
+                s.name, s.major, s.id, s.age, s.sex == 1 ? "male" : "female");
     }
 };
