@@ -1,5 +1,5 @@
 #include <fmt/format.h>
-#include <Dadabase.hpp>
+#include <Database.hpp>
 #include <Logger.hpp>
 Database::Database() {
     mysql_init(&mysql);
