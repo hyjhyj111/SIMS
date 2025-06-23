@@ -9,4 +9,5 @@ public:
     static void find_student();
     static void show_sorted();
     static void add_admin();
+    static void log_out(bool &, const std::string &);
 };

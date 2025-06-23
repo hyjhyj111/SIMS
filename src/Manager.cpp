@@ -6,7 +6,7 @@
 #include <Admin.hpp>
 void manager::menu() {
     std::cout << "********************************************" << std::endl;
-    std::cout << "**********  欢迎使用学生管理系统！ *********" << std::endl;
+    std::cout << "**********  欢迎使用学生管理系统！ ***********" << std::endl;
     std::cout << "*************  0.退出管理程序  *************" << std::endl;
     std::cout << "*************  1.增加学生信息  *************" << std::endl;
     std::cout << "*************  2.显示学生信息  *************" << std::endl;
@@ -15,6 +15,7 @@ void manager::menu() {
     std::cout << "*************  5.查找学生信息  *************" << std::endl;
     std::cout << "*************  6.按照学号排序  *************" << std::endl;
     std::cout << "*************  7.增加管理账户  *************" << std::endl;
+    std::cout << "*************  8.登出管理系统  *************" << std::endl;
     std::cout << "********************************************" << std::endl;
     std::cout << std::endl;
 }
@@ -231,4 +232,9 @@ void manager::add_admin() {
 
     fmt::print("管理员账户添加成功！\n");
     LOG_INFO(fmt::format("新增管理员账户：{}", username));
+}
+
+void manager::log_out(bool &login, const std::string &username) {
+    login = false;
+    LOG_INFO(fmt::format("{} logout", username));
 }

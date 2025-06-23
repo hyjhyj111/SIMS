@@ -4,10 +4,11 @@
 #include <Logger.hpp>
 #include <fmt/format.h>
 void solve() {
-    bool login = false;
-    while (true) {
+    bool login = false, EXIT = false;
+    std::string username;
+    while (!EXIT) {
         if (!login) {
-            std::string username, password;
+            std::string password;
             std::cout << "请输入账号:";
             std::cin >> username;
             std::cout << "请输入密码:";
@@ -28,7 +29,8 @@ void solve() {
         std::cin >> op;
         switch (op) {
             case 0:
-                exit({});
+                EXIT = true;
+                break;
             case 1:
                 manager::add_student();
                 break;
@@ -50,6 +52,8 @@ void solve() {
             case 7:
                 manager::add_admin();
                 break;
+            case 8:
+                manager::log_out(login, username);
             default:
                 system("clear");
                 break;
@@ -57,6 +61,8 @@ void solve() {
     }
 }
 int main() {
+    Logger::Init();
     solve();
+    Logger::Shutdown();
     return 0;
 }
