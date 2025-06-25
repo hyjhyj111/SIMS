@@ -4,6 +4,7 @@
 #include <utility>
 #include <termios.h>
 #include <unistd.h>
+std::string sha256(const std::string& input);
 class Admin {
 public:
     Admin() = default;
@@ -13,7 +14,7 @@ public:
     std::string get_username() const { return username; }
     bool check_password(const std::string& password) const {
         Database db;
-        return db.admin_exit(username, password);
+        return db.admin_exit(username, sha256(password));
     }
 
 private:

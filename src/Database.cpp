@@ -1,6 +1,18 @@
 #include <fmt/format.h>
 #include <Database.hpp>
 #include <Logger.hpp>
+#include <openssl/sha.h>
+
+std::string sha256(const std::string& input) {
+    unsigned char hash[SHA256_DIGEST_LENGTH];
+    SHA256((const unsigned char*)input.c_str(), input.size(), hash);
+
+    std::stringstream ss;
+    for (unsigned char c : hash)
+        ss << std::hex << std::setw(2) << std::setfill('0') << (int)c;
+    return ss.str();
+}
+
 Database::Database() {
     mysql_init(&mysql);
     if (!mysql_real_connect(&mysql, "localhost", "root", "123456", "SIMS", 3306, nullptr, 0))
@@ -54,7 +66,7 @@ void Database::insert_student(const Student& s) {
 
 void Database::insert_admin(const std::string &username, const std::string &password) {
     std::string sql = "INSERT INTO admin (username, password) VALUES ('" +
-                      username + "', '" + password + "');";
+                      username + "', '" + sha256(password) + "');";
     _insert(sql);
 }
 

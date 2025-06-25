@@ -17,6 +17,11 @@ if(APPLE)
     target_include_directories(stu PRIVATE /opt/homebrew/include)
     target_link_directories(stu PRIVATE /opt/homebrew/lib)
     target_link_libraries(stu PRIVATE mysqlclient fmt-header-only)
+
+    target_include_directories(stu PRIVATE /opt/homebrew/opt/openssl/include)
+    target_link_libraries(stu PRIVATE
+            /opt/homebrew/opt/openssl/lib/libssl.dylib
+            /opt/homebrew/opt/openssl/lib/libcrypto.dylib)
 elseif(UNIX)
     set(CMAKE_CXX_STANDARD 23)
 

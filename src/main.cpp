@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include <iostream>
 #include <Manager.hpp>
 #include <Admin.hpp>
 #include <Logger.hpp>
